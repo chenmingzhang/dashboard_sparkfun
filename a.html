@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- EXTERNAL LIBS-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://www.google.com/jsapi"></script>
+
+    <!-- EXAMPLE SCRIPT -->
+    <script>
+
+      // onload callback
+      function drawChart() {
+
+        var public_key = 'dZ4EVmE8yGCRGx5XRX1W';
+
+        // JSONP request
+        var jsonData = $.ajax({
+          url: 'https://data.sparkfun.com/output/' + public_key + '.json',
+	  //data: {page: 1},
+	  //data: {page: 1,sample:10},  // this is working!
+	  //data: {page: [3],sample:10},  // this is working!
+	  //https://github.com/sparkfun/phant/pull/85
+          //data: {'gte' :{'timestamp' : 'now - 3 days'}, sample:50},
+          //data: {limit:100, sample:50},   // working!!
+          //data: {limit:1000, sample:50},   // working!!
+          //data: {limit:1000, sample:500},   //  working!!
+          // data: {limit:100, sample:1000},   // working!!
+          //data: {limit:100, sample:1000},   // not working!!
+          data: {limit:100, sample:500},   // not working!!
+          dataType: 'jsonp',
+        }).done(function (results) {
+
+          var data = new google.visualization.DataTable();
+
+          data.addColumn('datetime', 'Time');
+          data.addColumn('number', 'Temp');
+          data.addColumn('number', 'Wind Speed MPH');
+
+          $.each(results, function (i, row) {
+            data.addRow([
+              (new Date(row.timestamp)),
+              parseFloat(row.tempf),
+              parseFloat(row.windspeedmph)
+            ]);
+          });
+
+          var chart = new google.visualization.LineChart($('#chart').get(0));
+
+          chart.draw(data, {
+            title: 'Wimp Weather Station'
+          });
+
+        });
+      }    //function drawChart 
+
+      // load chart lib
+      google.load('visualization', '1', {
+        packages: ['corechart']
+      });
+
+      // call drawChart once google charts is loaded
+      google.setOnLoadCallback(drawChart);
+
+    </script>
+
+  </head>
+  <body>
+    <div id="chart" style="width: 100%;"></div>
+  </body>
+</html>
