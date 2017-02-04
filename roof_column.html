@@ -26,7 +26,7 @@
           //data: {limit:1000, sample:500},   //  working!!
           // data: {limit:100, sample:1000},   // working!!
           //data: {limit:100, sample:1000},   // not working!!
-          data: {limit:10, sample:50},   // not working!!
+          data: {limit:10, sample:500},   // not working!!
           dataType: 'jsonp',
         }).done(function (results) {
 
@@ -60,24 +60,12 @@
 
       // call drawChart once google charts is loaded
       google.setOnLoadCallback(drawChart);
-      function resizeChart () {
-          chart.draw(data, options);
-      }
-      if (document.addEventListener) {
-          window.addEventListener('resize', resizeChart);
-      }
-      else if (document.attachEvent) {
-          window.attachEvent('onresize', resizeChart);
-      }
-      else {
-          window.resize = resizeChart;
-      }
+
     </script>
 
   </head>
   <body>
-
     <!-- <div id="chart" style="width: 100%;"></div> original -->
-    <div id="chart" style="width: 100px; height: 100px"></div>
+    <div id="chart" style="width: 100%; height: 50%"></div>
   </body>
 </html>
