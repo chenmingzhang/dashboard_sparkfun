@@ -65,7 +65,7 @@ var margin = {top: 30, right: 100, bottom: 100, left: 50},
 
 
 //var key_mo=["mo0","mo1","mo2","mo3","mo4","mo5","mo6","mo7","mo8","mo9","mo10","mo11"];
-var key_mo=["mo1","mo2","mo3","mo4","mo5","mo6","mo7","mo8","mo9"];
+var key_mo=["mo1","mo2","mo3","mo4","mo5","mo6","mo7","mo8","mo9","mo10","mo11"];
 var key_temp=["tp12","tp2","tp21","tp32","tp35","tp4b","tp8a","tp9f","tpa3","tpc7","tpe5"];
 var active1=[];
 var act_temp=[];
@@ -147,10 +147,10 @@ var svg2 = d3.select("body")
         //y.domain([0, 30]);
 
 
-//-------------------below are new datas ------------------- 
+//----------------below are moisture plottings---------------------- 
 
         //var color = d3.scaleOrdinal(d3.schemeCategory10);
-        var color = d3.scaleOrdinal(d3.schemeCategory10);
+        var color = d3.scaleOrdinal(d3.schemeCategory20);
 
         key_mo.forEach(function(d,i) {
             svg.append("path")
